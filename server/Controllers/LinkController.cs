@@ -10,6 +10,8 @@ namespace Controllers.LinkController;
 
 [ApiController]
 [Route("/api/[controller]")]
+
+[Authorize]
 public class LinkController : ControllerBase
 {
 
@@ -24,7 +26,6 @@ public class LinkController : ControllerBase
         _logger = logger;
     }
 
-    [Authorize]
     [HttpGet("GetLink")]
     public async Task<IActionResult> GetLink(string url)
     {
@@ -41,7 +42,6 @@ public class LinkController : ControllerBase
         }
     }
 
-    [Authorize]
     [HttpPost("TransformLink")]
     public async Task<IActionResult> PostLink(string url)
     {

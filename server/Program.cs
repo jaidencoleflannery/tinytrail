@@ -1,10 +1,13 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Authentication;
 using Data.LinkContext;
 using Services.LinkService;
 using Middleware.ExceptionHandler;
 using Models.UserModel;
+using Microsoft.AspNetCore.Authentication.Cookies;
+using Microsoft.Extensions.DependencyInjection;
 
 var builder = WebApplication.CreateBuilder(args); // < THIS COMES WITH LOGGING!
 
@@ -27,10 +30,18 @@ builder.Services.AddDbContext<LinkContext>(options =>
 );
 
 // setup identity
-builder.Services.AddIdentityCore<User>(options => 
-    options.SignIn.RequireConfirmedAccount = false)   
-    .AddEntityFrameworkStores<LinkContext>()
-    .AddDefaultTokenProviders();
+builder.Services
+  .AddIdentity<User, IdentityRole>(opts =>
+  {
+    opts.SignIn.RequireConfirmedAccount = false;
+  })
+  .AddEntityFrameworkStores<LinkContext>()
+  .AddDefaultTokenProviders();
+
+// setup authentication for user login
+builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
+    .AddCookie(CookieAuthenticationDefaults.AuthenticationScheme,
+        options => builder.Configuration.Bind("CookieSettings", options));
 
 var app = builder.Build();
 
