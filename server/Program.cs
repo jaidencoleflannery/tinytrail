@@ -13,22 +13,22 @@ builder.Logging.AddConsole();
 builder.Logging.AddDebug();
 
 // Add services to the container.
-
 builder.Services.AddControllers();
+builder.Services.AddDataProtection();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
 builder.Services.AddScoped<ILinkService, LinkService>();
 
-// scoped lifetime for controllers
+// scoped lifetime database context for controllers
 builder.Services.AddDbContext<LinkContext>(options =>
     options.UseNpgsql(builder.Configuration.GetConnectionString("DefaultConnection") ?? throw new InvalidOperationException("Connection string 'LinkContext' not found."))
 );
 
 // setup identity
-builder.Services.AddIdentityCore<User>(options =>
-    { /* password/lockout etc. */ })
+builder.Services.AddIdentityCore<User>(options => 
+    options.SignIn.RequireConfirmedAccount = false)   
     .AddEntityFrameworkStores<LinkContext>()
     .AddDefaultTokenProviders();
 
@@ -46,6 +46,8 @@ else {
 }
 
 // app.UseHttpsRedirection();
+
+app.UseAuthentication();
 
 app.UseAuthorization();
 
