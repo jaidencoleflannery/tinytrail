@@ -1,8 +1,10 @@
 using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.Logging; 
+using Microsoft.Extensions.Logging;
+using Microsoft.AspNetCore.Identity;
 using Data.LinkContext;
 using Services.LinkService;
 using Middleware.ExceptionHandler;
+using Models.UserModel;
 
 var builder = WebApplication.CreateBuilder(args); // < THIS COMES WITH LOGGING!
 
@@ -24,12 +26,11 @@ builder.Services.AddDbContext<LinkContext>(options =>
     options.UseNpgsql(builder.Configuration.GetConnectionString("DefaultConnection") ?? throw new InvalidOperationException("Connection string 'LinkContext' not found."))
 );
 
-// manually controlled (factory) lifetime for holding in containers with differing lifetimes
-/*
-builder.Services.AddDbContextFactory<LinkContext>(options =>
-    options.UseNpgsql(builder.Configuration.GetConnectionString("DefaultConnection") ?? throw new InvalidOperationException("Connection string 'LinkContext' not found."))
-);
-*/
+// setup identity
+builder.Services.AddIdentityCore<User>(options =>
+    { /* password/lockout etc. */ })
+    .AddEntityFrameworkStores<LinkContext>()
+    .AddDefaultTokenProviders();
 
 var app = builder.Build();
 
