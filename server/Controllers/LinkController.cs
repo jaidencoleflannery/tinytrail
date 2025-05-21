@@ -1,4 +1,5 @@
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Authorization;
 using Models.LinkModel;
 using Data.LinkContext;
 using Services.LinkService;
@@ -9,6 +10,8 @@ namespace Controllers.LinkController;
 
 [ApiController]
 [Route("/api/[controller]")]
+
+[Authorize]
 public class LinkController : ControllerBase
 {
 
