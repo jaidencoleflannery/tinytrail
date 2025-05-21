@@ -1,1 +1,130 @@
-/* You can add global styles to this file, and also import other style files */
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap');
+
+:root {
+    --bg-color: #1f2020;
+    --font-color: #ffffff;
+    --placeholder-color: #3c3c3c;
+    --body-bg: #3c3c3c;
+    --menu-bg: #272727;
+    --border-color: #4e4e4e;
+    --font-family: "Roboto", sans-serif;
+    --font-size: 1.25rem;
+    --transition-speed: 0.3s;
+    --curve: 2rem;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    outline: none;
+    list-style-type: none;
+    font-weight: lighter;
+
+    scrollbar-width: none; /* Firefox */
+    -ms-overflow-style: none;  /* Internet Explorer and Edge */
+    overflow: -moz-scrollbars-none; /* Old versions of Firefox */
+
+    /* disabling text selection */
+    -webkit-touch-callout: none; /* iOS Safari */
+    -webkit-user-select: none; /* Safari */
+     -khtml-user-select: none; /* Konqueror HTML */
+       -moz-user-select: none; /* Old versions of Firefox */
+        -ms-user-select: none; /* Internet Explorer/Edge */
+            user-select: none; /* Non-prefixed version, currently
+                                  supported by Chrome, Edge, Opera and Firefox */
+}
+
+*::-webkit-scrollbar {
+    display: none;
+}
+
+a {
+  font-size: var(--text-size);
+  color: inherit;
+  text-decoration: inherit;
+}
+
+html {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+    width: 100vw;
+    height: 100vh;
+}
+
+body {
+    font-family: var(--font-family);
+    font-size: var(--font-size);
+    background-color: var(--bg-color);
+    color: var(--font-color);
+    list-style-type: none;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+    width: 100%;
+    height: 100%;
+}
+
+#root {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 100%;
+}
+
+/* navigation */
+.main-section {
+    display:flex;
+    flex-direction: column;
+    flex: 1;
+    height: 100vh;
+}
+
+#nav {
+    display: flex;
+    flex-direction: row;
+    flex-grow: 2;
+    margin: 5.4rem;
+    padding: 1rem;
+    background-color: var(--body-bg);
+    height: 90vh;
+    border-radius: var(--curve);
+    overflow-x: hidden;
+    overflow-y: auto;
+    border: 3px solid var(--border-color);
+    box-shadow: rgba(0, 0, 0, 0.19) 0px 10px 20px, rgba(0, 0, 0, 0.23) 0px 6px 6px;
+}
+
+.nav-header {
+    width: 100%;
+    height: fit-content;
+    padding: 0.8rem;
+    margin: 0.8rem;
+}
+
+#nav-body {
+    width: 100%;
+    height: 100%;
+    padding: 0.8rem;
+    margin: 0.8rem;
+}
+
+#main {
+    min-width: 60vw;
+    display: flex;
+    flex-direction: row;
+    margin: 5.4rem;
+    margin-left: 0rem;
+    padding: 1rem;
+    background-color: var(--body-bg);
+    height: 90vh;
+    border-radius: var(--curve);
+    overflow-x: hidden;
+    overflow-y: auto;
+    border: 3px solid var(--border-color);
+    box-shadow: rgba(0, 0, 0, 0.19) 0px 10px 20px, rgba(0, 0, 0, 0.23) 0px 6px 6px;
+}
