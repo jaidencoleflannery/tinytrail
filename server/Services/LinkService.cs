@@ -13,14 +13,35 @@ public class LinkService : ILinkService
         _db = db;
         _logger = logger;
     }
-    public async Task<LinkDto> GetLink(string url, string? userId)
+    public async Task<LinkDto> GetLink(string url, string userId)
     {
         try
         {
             var entity = await _db.Links.FirstOrDefaultAsync(val => val.Url == url);
             if (entity != null)
             {
-                LinkDto link = new LinkDto { Url = entity.Url, ShortUrl = entity.ShortUrl, UserId = entity.UserId };
+                LinkDto link = new LinkDto { Url = entity.Url, ShortUrl = ("tinytrail.com/" + entity.ShortUrl), UserId = entity.UserId };
+                return link;
+            }
+            else
+            {
+                throw new KeyNotFoundException("Link Not Found");
+            }
+        }
+        catch (Exception ex)
+        {
+            throw new Exception("(LinkService GetLink) Exception Encountered: {Error}", ex);
+        }
+    }
+    
+    public async Task<LinkDto> GetShortLink(string url, string userId)
+    {
+        try
+        {
+            var entity = await _db.Links.FirstOrDefaultAsync(val => val.ShortUrl == url);
+            if (entity != null)
+            {
+                LinkDto link = new LinkDto { Url = entity.Url, ShortUrl = ("tinytrail.com/" + entity.ShortUrl), UserId = entity.UserId };
                 return link;
             }
             else
@@ -34,7 +55,8 @@ public class LinkService : ILinkService
         }
     }
 
-    public async Task<Link> SetLink(string url, string? userId) {
+    public async Task<Link> SetLink(string url, string userId)
+    {
         if (await _db.Links.FirstOrDefaultAsync(val => val.Url == url) != null)
         {
             throw new Exception("(LinkService SetLink) Duplicate Value");
