@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Authorization;
 using Models.LinkModel;
 using Data.LinkContext;
 using Services.LinkService;
+using System.Security.Claims;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http.HttpResults;
 
@@ -31,7 +32,7 @@ public class LinkController : ControllerBase
     {
         try
         {
-            var val = await _link.GetLink(url, null);
+            var val = await _link.GetLink(url, User.FindFirst(ClaimTypes.NameIdentifier)?.Value);
             return Ok(val);
         }
         catch (Exception ex)
@@ -47,7 +48,7 @@ public class LinkController : ControllerBase
     {
         try
         {
-            Link link = await _link.SetLink(url, null);
+            Link link = await _link.SetLink(url, User.FindFirst(ClaimTypes.NameIdentifier)?.Value);
             return CreatedAtAction("GetLink", link);
         }
         catch (Exception ex)
