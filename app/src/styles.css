@@ -1,1 +1,252 @@
-/* You can add global styles to this file, and also import other style files */
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap');
+
+:root {
+    --bg-color: #f4f4f4;
+    --font-color: #1b1b1b;
+    --placeholder-color: #4e4e4e;
+    --body-bg: #f8f8f8;
+    --menu-bg: #006eff;
+    --border-color: #ffffff;
+    --font-family: "Roboto", sans-serif;
+    --font-size: 2rem;
+    --font-large: 4rem;
+    --transition-speed: 0.3s;
+    --curve: 2.6rem;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    outline: none;
+    list-style-type: none;
+    font-weight: lighter;
+    font-family: "Merriweather", serif;
+    font-optical-sizing: auto;
+    font-style: normal;
+    font-variation-settings: "wdth" 100;
+    color: var(--font-color);
+
+    scrollbar-width: none; /* Firefox */
+    -ms-overflow-style: none;  /* Internet Explorer and Edge */
+    overflow: -moz-scrollbars-none; /* Old versions of Firefox */
+}
+
+*::-webkit-scrollbar {
+    display: none;
+}
+
+a {
+  font-size: var(--font-size);
+  color: inherit;
+  text-decoration: inherit;
+}
+
+textPath {
+    font-size: var(--font-size);
+    color: inherit;
+    text-decoration: inherit;
+}
+
+svg {
+  width: 60vmin;
+  overflow: visible;
+}
+
+path {
+  opacity: var(--show, 0);
+  transition: opacity 0.2s;
+}
+
+html {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+    width: 100vw;
+    height: 100vh;
+}
+
+body {
+    font-family: var(--font-family);
+    font-size: var(--font-size);
+    background-color: var(--bg-color);
+    color: var(--font-color);
+    list-style-type: none;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+    width: 100%;
+    height: 100%;
+}
+
+#root {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 100%;
+}
+
+#nav {
+    display: flex;
+    flex-direction: column;
+    flex-grow: 2;
+    margin: 0rem;
+    margin-top: 0rem;
+    padding: 0rem;
+    padding-top: 0rem;
+    background-color: var(--body-bg);
+    overflow-x: hidden;
+    overflow-y: auto;
+    border-bottom: 3px solid var(--border-color);
+    box-shadow: rgba(0, 0, 0, 0.01) 0px 10px 20px, rgba(0, 0, 0, 0.01) 0px 6px 6px;
+    max-height: 6vh;
+    width: 100vw;
+    justify-content: center;
+}
+
+.nav-header {
+    width: 100%;
+    height: fit-content;
+    padding: 0.8rem;
+    margin: 0.8rem;
+
+        /* disabling text selection */
+    -webkit-touch-callout: none; /* iOS Safari */
+    -webkit-user-select: none; /* Safari */
+     -khtml-user-select: none; /* Konqueror HTML */
+       -moz-user-select: none; /* Old versions of Firefox */
+        -ms-user-select: none; /* Internet Explorer/Edge */
+            user-select: none; /* Non-prefixed version, currently
+                                  supported by Chrome, Edge, Opera and Firefox */
+}
+
+#nav-body {
+    width: 100%;
+    height: 100%;
+    padding: 0.8rem;
+    margin: 0.8rem;
+}
+
+#main {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    justify-content: center;
+    align-items: center;
+    margin: 0rem;
+    padding: 6rem;
+
+            /* disabling text selection */
+    -webkit-touch-callout: none; /* iOS Safari */
+    -webkit-user-select: none; /* Safari */
+     -khtml-user-select: none; /* Konqueror HTML */
+       -moz-user-select: none; /* Old versions of Firefox */
+        -ms-user-select: none; /* Internet Explorer/Edge */
+            user-select: none; /* Non-prefixed version, currently
+                                  supported by Chrome, Edge, Opera and Firefox */
+}
+
+#main-body {
+    display: flex;
+    flex-direction: column;
+    border: 3px solid var(--border-color);
+    box-shadow: rgba(0, 0, 0, 0.01) 0px 10px 20px, rgba(0, 0, 0, 0.01) 0px 6px 6px;
+    width: 60rem;
+    height: 60%;
+    border-radius: var(--curve);
+    background-color: var(--body-bg);
+    margin: 0rem;
+    padding: 4rem 2rem 4rem 2rem;
+}
+
+#main-header {
+    display: flex;
+    height: 100%;
+    font-size: 4rem;
+    font-weight: bolder;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    color: var(--menu-bg);
+}
+
+#link-container {
+    width: 100%;
+    height: fit-content;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+}
+
+#link-input {
+    display: flex;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    padding: 0;
+    margin: 0;
+    color: var(--menu-bg);
+}
+
+#input {
+    display: flex;
+    width: 80%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    background-color: var(--bg-color);
+    height: 6rem;
+    color: var(--font-color);
+    font-size: var(--font-size);
+    border: 3px solid var(--border-color);
+    border-radius: var(--curve);
+    box-shadow: rgba(0, 0, 0, 0.01) 0px 10px 20px, rgba(0, 0, 0, 0.01) 0px 6px 6px;
+    margin: 2rem;
+}
+
+#link-output {
+    display: flex;
+    justify-content: right;
+    align-items: center;
+    height: 100%;
+    width: fit-content;
+    padding-right: 2rem;
+}
+
+#link-submit {
+    padding: 1.8rem;
+    border-radius: var(--curve);
+    cursor: pointer;
+    border: 3px solid var(--menu-bg);
+    background-color: var(--menu-bg);
+    color: var(--border-color);
+}
+
+.header {
+    display: flex;
+    height: 20%;
+    font-size: 4rem;
+    font-weight: bolder;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    color: var(--menu-bg);
+}
+
+.blue-highlight {
+    color: var(--menu-bg);
+}
