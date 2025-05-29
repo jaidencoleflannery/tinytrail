@@ -29,6 +29,19 @@ builder.Services.AddDbContext<LinkContext>(options =>
     options.UseNpgsql(builder.Configuration.GetConnectionString("DefaultConnection") ?? throw new InvalidOperationException("Connection string 'LinkContext' not found."))
 );
 
+// setup cors
+builder.Services
+  .AddCors(options =>
+{
+        options.AddPolicy("Default",
+        policy =>
+        {
+            policy.WithOrigins("http://localhost:5137") // replace with prod url on deploy
+              .AllowAnyHeader()
+              .AllowAnyMethod();
+        });
+});
+
 // setup identity
 builder.Services
   .AddIdentity<User, IdentityRole>(opts =>

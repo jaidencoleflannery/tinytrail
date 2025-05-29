@@ -13,20 +13,38 @@ public class LinkService : ILinkService
         _db = db;
         _logger = logger;
     }
+    // GetLink takes a short url, and returns a long url.
     public async Task<LinkDto> GetLink(string url, string? userId)
     {
         try
         {
-            var entity = await _db.Links.FirstOrDefaultAsync(val => val.Url == url);
+            var entity = await _db.Links.FirstOrDefaultAsync(val => val.ShortUrl == url);
             if (entity != null)
             {
-                LinkDto link = new LinkDto { Url = entity.Url, ShortUrl = entity.ShortUrl, UserId = entity.UserId };
+                LinkDto link = new LinkDto { Url = entity.Url, ShortUrl = "http://localhost:5137/api/Route/" + entity.ShortUrl }; // REPLACE THIS WITH THE PROD URL ON DEPLOY
+                _logger.LogInformation($"(GetLink) URL GRABBED: {entity.Url}");
                 return link;
             }
-            else
+            else throw new KeyNotFoundException("(GetLink) Link not found.");
+        }
+        catch (Exception ex)
+        {
+            throw new Exception("(LinkService GetLink) Exception Encountered: {Error}", ex);
+        }
+    }
+    
+    public async Task<LinkDto> GetShortLink(string url, string? userId)
+    {
+        try
+        {
+            var entity = await _db.Links.FirstOrDefaultAsync(val => val.ShortUrl == url);
+            if (entity != null)
             {
-                throw new KeyNotFoundException("Link Not Found");
+                LinkDto link = new LinkDto { Url = entity.Url, ShortUrl = "http://localhost:5137/api/Route/" + entity.ShortUrl }; // REPLACE THIS WITH THE PROD URL ON DEPLOY
+                _logger.LogInformation($"(GetLink) URL GRABBED: {entity.Url}");
+                return link;
             }
+            else throw new KeyNotFoundException("(GetLink) Link not found.");
         }
         catch (Exception ex)
         {
@@ -34,7 +52,8 @@ public class LinkService : ILinkService
         }
     }
 
-    public async Task<Link> SetLink(string url, string? userId) {
+    public async Task<Link> SetLink(string url, string userId)
+    {
         if (await _db.Links.FirstOrDefaultAsync(val => val.Url == url) != null)
         {
             throw new Exception("(LinkService SetLink) Duplicate Value");
