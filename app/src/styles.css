@@ -2,16 +2,18 @@
 
 :root {
     --bg-color: #f4f4f4;
-    --font-color: #1b1b1b;
+    --font-color: #ffffff;
+    --font-contrast: #002a61;
     --placeholder-color: #4e4e4e;
     --body-bg: #f8f8f8;
-    --menu-bg: #006eff;
+    --menu-bg: #58a1ff;
+    --menu-border: #5a86be;
     --border-color: #ffffff;
     --font-family: "Roboto", sans-serif;
     --font-size: 2rem;
     --font-large: 4rem;
     --transition-speed: 0.3s;
-    --curve: 2.6rem;
+    --curve: 2rem;
 }
 
 * {
@@ -78,6 +80,8 @@ body {
     overflow: hidden;
     width: 100%;
     height: 100%;
+    background: #EEAECA;
+    background: radial-gradient(circle, rgba(238, 174, 202, 1) 0%, rgba(148, 187, 233, 1) 100%);
 }
 
 #root {
@@ -94,24 +98,24 @@ body {
     flex-direction: column;
     flex-grow: 2;
     margin: 0rem;
-    margin-top: 0rem;
-    padding: 0rem;
-    padding-top: 0rem;
-    background-color: var(--body-bg);
+    padding: 1rem;
+    padding-left: 2.6rem;
+    padding-right: 2.6rem;
     overflow-x: hidden;
     overflow-y: auto;
-    border-bottom: 3px solid var(--border-color);
-    box-shadow: rgba(0, 0, 0, 0.01) 0px 10px 20px, rgba(0, 0, 0, 0.01) 0px 6px 6px;
-    max-height: 6vh;
     width: 100vw;
     justify-content: center;
+    overflow: hidden;
 }
 
 .nav-header {
+    display: flex;
+    justify-content: space-between;
     width: 100%;
-    height: fit-content;
-    padding: 0.8rem;
-    margin: 0.8rem;
+    padding: 0rem;
+    margin: 0rem;
+    height: 100%;
+    overflow: hidden;
 
         /* disabling text selection */
     -webkit-touch-callout: none; /* iOS Safari */
@@ -128,11 +132,12 @@ body {
     height: 100%;
     padding: 0.8rem;
     margin: 0.8rem;
+    overflow: hidden;
 }
 
 #main {
     width: 100%;
-    height: 100%;
+    height: 90vh;
     display: flex;
     flex-direction: column;
     overflow: hidden;
@@ -154,30 +159,27 @@ body {
 #main-body {
     display: flex;
     flex-direction: column;
-    border: 3px solid var(--border-color);
-    box-shadow: rgba(0, 0, 0, 0.01) 0px 10px 20px, rgba(0, 0, 0, 0.01) 0px 6px 6px;
     width: 60rem;
-    height: 60%;
+    height: fit-content;
     border-radius: var(--curve);
-    background-color: var(--body-bg);
     margin: 0rem;
     padding: 4rem 2rem 4rem 2rem;
 }
 
 #main-header {
     display: flex;
-    height: 100%;
+    height: 24rem;
     font-size: 4rem;
     font-weight: bolder;
     justify-content: center;
     align-items: center;
     text-align: center;
-    color: var(--menu-bg);
+    color: var(--font-color);
 }
 
 #link-container {
     width: 100%;
-    height: fit-content;
+    height: 100%;
     display: flex;
     flex-direction: row;
     justify-content: center;
@@ -207,14 +209,18 @@ body {
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    text-align: center;
+    text-align: left;
+    padding: 2rem;
     background-color: var(--bg-color);
     height: 6rem;
     color: var(--font-color);
     font-size: var(--font-size);
     border: 3px solid var(--border-color);
     border-radius: var(--curve);
-    box-shadow: rgba(0, 0, 0, 0.01) 0px 10px 20px, rgba(0, 0, 0, 0.01) 0px 6px 6px;
+    box-shadow: rgba(0, 0, 0, 0.04) 0px 10px 20px, rgba(0, 0, 0, 0.04) 0px 6px 6px;
+    background: #ffffff;
+    background: linear-gradient(180deg, rgba(255, 255, 255, 0.8) 9%, rgba(255, 255, 255, 0.4) 100%);
+    color: var(--font-contrast);
     margin: 2rem;
 }
 
@@ -224,6 +230,7 @@ body {
     align-items: center;
     height: 100%;
     width: fit-content;
+    padding: 0;
     padding-right: 2rem;
 }
 
@@ -231,22 +238,40 @@ body {
     padding: 1.8rem;
     border-radius: var(--curve);
     cursor: pointer;
-    border: 3px solid var(--menu-bg);
+    border: 3px solid var(--menu-border);
     background-color: var(--menu-bg);
     color: var(--border-color);
+    box-shadow: rgba(0, 0, 0, 0.04) 0px 10px 20px, rgba(0, 0, 0, 0.04) 0px 6px 6px;
+    background: var(--menu-bg);
+    background: #2986ff;
+    background: linear-gradient(180deg, rgba(41, 134, 255, 1) 9%, var(--menu-bg) 100%);
 }
 
 .header {
     display: flex;
-    height: 20%;
     font-size: 4rem;
     font-weight: bolder;
     justify-content: center;
     align-items: center;
     text-align: center;
-    color: var(--menu-bg);
+    color: var(--font-color);
 }
 
-.blue-highlight {
-    color: var(--menu-bg);
+#nav-title {
+    border: 3px solid var(--border-color);
+    margin: 0.8rem;
+    padding: 1.2rem;
+    border-radius: var(--curve);
+}
+
+span.icon {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+}
+
+.icon img{
+    height: 100%;
+    width: 4rem;
 }
