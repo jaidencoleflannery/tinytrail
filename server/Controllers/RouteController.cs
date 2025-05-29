@@ -10,8 +10,9 @@ using Microsoft.AspNetCore.Http.HttpResults;
 namespace Controllers.RouteController;
 
 [ApiController]
-[Route("/")]
+[Route("/api/[controller]")]
 
+[AllowAnonymous] 
 public class RouteController : ControllerBase
 {
     private readonly LinkContext _db;
@@ -28,18 +29,24 @@ public class RouteController : ControllerBase
     [HttpGet("{url}")]
     public async Task<IActionResult> GoToLink([FromRoute] string url)
     {
-         _logger.LogInformation($"Searching for {url}");
         try
         {
-            var val = await _link.GetShortLink(url, User.FindFirst(ClaimTypes.NameIdentifier)?.Value);
-            _logger.LogInformation($"Redirecting to {val}");
-            return RedirectPermanent(val.Url);
+            var val = await _link.GetLink(url, null);
+            if (val == null) return NotFound();
+
+            string redirectUrl = "";
+
+            if (!val.Url.StartsWith("http://") && !val.Url.StartsWith("https://"))
+            {
+                redirectUrl = "http://" + val.Url;
+            }
+            else redirectUrl = val.Url;
+            return Redirect(redirectUrl);
         }
-        catch (Exception ex)
+        catch (KeyNotFoundException ex)
         {
-            _logger.LogError("(LinkController GetLink) Exception Encountered: {error}", ex);
-            string response = "Could Not Find URL: " + url;
-            return BadRequest(response);
+            _logger.LogError($"(LinkController GetLink) Exception Encountered: {ex}");
+            return BadRequest($"Could Not Find URL: {url}");
         }
     }
 }

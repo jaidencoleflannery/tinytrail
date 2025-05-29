@@ -13,20 +13,19 @@ public class LinkService : ILinkService
         _db = db;
         _logger = logger;
     }
-    public async Task<LinkDto> GetLink(string url, string userId)
+    // GetLink takes a short url, and returns a long url.
+    public async Task<LinkDto> GetLink(string url, string? userId)
     {
         try
         {
-            var entity = await _db.Links.FirstOrDefaultAsync(val => val.Url == url);
+            var entity = await _db.Links.FirstOrDefaultAsync(val => val.ShortUrl == url);
             if (entity != null)
             {
-                LinkDto link = new LinkDto { Url = entity.Url, ShortUrl = ("tinytrail.com/" + entity.ShortUrl), UserId = entity.UserId };
+                LinkDto link = new LinkDto { Url = entity.Url, ShortUrl = "http://localhost:5137/api/Route/" + entity.ShortUrl }; // REPLACE THIS WITH THE PROD URL ON DEPLOY
+                _logger.LogInformation($"(GetLink) URL GRABBED: {entity.Url}");
                 return link;
             }
-            else
-            {
-                throw new KeyNotFoundException("Link Not Found");
-            }
+            else throw new KeyNotFoundException("(GetLink) Link not found.");
         }
         catch (Exception ex)
         {
@@ -34,20 +33,18 @@ public class LinkService : ILinkService
         }
     }
     
-    public async Task<LinkDto> GetShortLink(string url, string userId)
+    public async Task<LinkDto> GetShortLink(string url, string? userId)
     {
         try
         {
             var entity = await _db.Links.FirstOrDefaultAsync(val => val.ShortUrl == url);
             if (entity != null)
             {
-                LinkDto link = new LinkDto { Url = entity.Url, ShortUrl = ("tinytrail.com/" + entity.ShortUrl), UserId = entity.UserId };
+                LinkDto link = new LinkDto { Url = entity.Url, ShortUrl = "http://localhost:5137/api/Route/" + entity.ShortUrl }; // REPLACE THIS WITH THE PROD URL ON DEPLOY
+                _logger.LogInformation($"(GetLink) URL GRABBED: {entity.Url}");
                 return link;
             }
-            else
-            {
-                throw new KeyNotFoundException("Link Not Found");
-            }
+            else throw new KeyNotFoundException("(GetLink) Link not found.");
         }
         catch (Exception ex)
         {
