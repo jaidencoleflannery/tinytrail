@@ -30,15 +30,15 @@ builder.Services.AddDbContext<LinkContext>(options =>
 );
 
 // setup cors
-builder.Services
-  .AddCors(options =>
+builder.Services.AddCors(options =>
 {
-        options.AddPolicy("Default",
+    options.AddDefaultPolicy(
         policy =>
         {
-            policy.WithOrigins("http://localhost:5137") // replace with prod url on deploy
-              .AllowAnyHeader()
-              .AllowAnyMethod();
+            policy.WithOrigins("http://localhost:4200")    
+                .AllowAnyHeader()
+                .AllowAnyMethod()
+                .AllowCredentials();
         });
 });
 
@@ -70,6 +70,8 @@ else {
 }
 
 // app.UseHttpsRedirection();
+
+app.UseCors();
 
 app.UseAuthentication();
 
