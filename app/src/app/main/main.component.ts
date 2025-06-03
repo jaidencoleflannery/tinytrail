@@ -9,10 +9,8 @@ import { ReactiveFormsModule, FormsModule, FormBuilder, FormControl } from '@ang
   styleUrl: './main.component.css'
 })
 export class MainComponent{
-  value: any;
   form: any;
-
-  link = new FormControl();
+  status: Boolean = false; // this is to track if the user has hit generate link, and toggle between the two states. false = has not generated link.
 
   constructor (private fb: FormBuilder) {
     this.form = this.fb.group({
@@ -38,26 +36,31 @@ export class MainComponent{
         }
         const data = await response.json();
         console.log("DATA:", data);
+        let formData = {value: data.shortUrl};
+        this.form.setValue(
+          formData
+        );
       } catch (error) {
         console.log(error);
       }
-      this.form.reset(
-        this.value = ''
-      );
+      this.toggleStatus();
       return null;
     }
-  }
-
-  dynamicInput(textarea: any): void {
-      textarea.style.height = "auto";
-      textarea.style.height = textarea.scrollHeight + "px";
   }
 
   handleEnter(event: KeyboardEvent, textarea: any): void {
     if (event.key === 'Enter' && !event.shiftKey) {
       event.preventDefault();
       this.submit();
-      this.dynamicInput(textarea);
     }
+  }
+
+  toggleStatus(): void {
+    console.log("toggle");
+    this.status = !this.status;
+  }
+
+  clearForm(): void {
+    this.form.reset();
   }
 }

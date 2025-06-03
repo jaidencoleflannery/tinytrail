@@ -5,10 +5,17 @@
         </span>
         <div id="link-container">
             <form id="task-form" [formGroup]="form" (ngSubmit)="submit()">
-                <span id="prompt">></span>
-                <textarea id="input" type="text" #valueInput formControlName="value" (keydown)="handleEnter($event, valueInput)" (keyup)="dynamicInput(valueInput)"></textarea>
-                                <div id="link-output">
-                    <button type="submit" id="link-submit"> Generate </button>
+                @if (this.status == true) {
+                    <textarea readonly id="input" type="text" #valueInput formControlName="value" (keydown)="handleEnter($event, valueInput)"></textarea>
+                } @else {
+                    <textarea id="input" type="text" #valueInput formControlName="value" (keydown)="handleEnter($event, valueInput)"></textarea>
+                }
+                <div id="link-output">
+                    @if (this.status == false) {
+                        <button type="submit" id="link-submit"> Generate </button>
+                    } @else {
+                        <span (click)="toggleStatus()" (click)="clearForm()" id="link-submit"> New Link </span>
+                    }
                 </div>
             </form>
         </div>
