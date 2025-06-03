@@ -83,7 +83,7 @@ public class LinkService : ILinkService
                 Link link = new Link { Url = url, UserId = userId, ShortUrl = this.GenerateShortLink() };
                 _db.Links.Add(link);
                 await _db.SaveChangesAsync();
-                Link result = new Link { Id = link.Id, Url = url, ShortUrl = link.ShortUrl, UserId = userId };
+                Link result = new Link { Id = link.Id, Url = url, ShortUrl = "http://localhost:5137/api/Route/" + link.ShortUrl, UserId = userId };
                 return result;
             }
             catch (Exception ex)
