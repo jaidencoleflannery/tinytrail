@@ -1,0 +1,27 @@
+<form class="login-container" [formGroup]="loginForm" (ngSubmit)="submit()" autocomplete="off">
+    <div class="login-icon">
+        <ul>
+            <li class="icon-large" id="login-icon">🖇️</li>
+        </ul>
+    </div>
+    <div class="login-title">
+        <ul>
+            <li>Welcome back</li>
+        </ul>
+    </div>
+    <div class="login-form">
+        <div class="login-row">
+            <img class="icon-small" src="icons/profile.svg">
+            <input class="input" type="username" formControlName="username" placeholder="Username" autocapitalize="off" spellcheck="false" required />
+            <div *ngIf="loginForm.get('username')?.touched && loginForm.get('username')?.invalid"> Invalid Username. </div>
+        </div>
+        <div class="login-row">
+            <img class="icon-small" src="icons/lock.svg">
+            <input class="input"  type="password" formControlName="password" placeholder="Password" autocomplete="new-password" required />
+            <div *ngIf="loginForm.get('password')?.touched && loginForm.get('password')?.invalid"> Invalid Password. </div>
+        </div>
+    </div>
+    <button type="submit" class="submit"></button>
+    <a class="login-register" href="/register">I'm new →</a>
+</form>
+ 

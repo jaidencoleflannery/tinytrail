@@ -1,14 +1,18 @@
-<div class="header">Where will your trail lead?</div>
-
-<div id="main-body">
-    <span id="main-header">
-    </span>
-    <div id="link-container">
-        <div id="link-input">
-            > <input [formControl]="link" id="input">
-        </div>
-        <div id="link-output">
-            <span id="link-submit"> <meta charset="ISO-8859-1"> Generate </span>
+<div id="main-container">
+    <div id="main-body">
+        <span id="main-header">
+            <div class="header">Where will your trail lead?</div>
+        </span>
+        <div id="link-container">
+            <form id="task-form" [formGroup]="form" (ngSubmit)="submit()">
+                <span id="prompt">></span>
+                <textarea id="input" type="text" #valueInput formControlName="value" (keydown)="handleEnter($event, valueInput)" (keyup)="dynamicInput(valueInput)"></textarea>
+                                <div id="link-output">
+                    <button type="submit" id="link-submit"> Generate </button>
+                </div>
+            </form>
         </div>
     </div>
 </div>
+
+
