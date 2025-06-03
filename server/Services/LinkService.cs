@@ -32,6 +32,24 @@ public class LinkService : ILinkService
             throw new Exception("(LinkService GetLink) Exception Encountered: {Error}", ex);
         }
     }
+
+    public async Task<List<Link>> GetUsersLinks(string userId)
+    {
+        try
+        {
+            List<Link> entity = await _db.Links.Where(val => val.UserId == userId)
+            .ToListAsync();
+            if (entity != null)
+            {
+                return entity;
+            }
+            else throw new KeyNotFoundException("(GetUsersLinks) User's links were not found.");
+        }
+        catch (Exception ex)
+        {
+            throw new Exception("(LinkService GetUsersLinks) Exception Encountered: {Error}", ex);
+        }
+    }
     
     public async Task<LinkDto> GetShortLink(string url, string? userId)
     {
