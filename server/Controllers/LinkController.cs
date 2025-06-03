@@ -43,6 +43,22 @@ public class LinkController : ControllerBase
         }
     }
 
+    [HttpGet("GetUsersLinks")]
+    public async Task<IActionResult> GetUsersLinks()
+    {
+        try
+        {
+            var val = await _link.GetUsersLinks(User.FindFirst(ClaimTypes.NameIdentifier)?.Value);
+            return Ok(val);
+        }
+        catch (Exception ex)
+        {
+            _logger.LogError("(LinkController GetLink) Exception Encountered: {error}", ex);
+            string response = ("Could Not Find links for user");
+            return BadRequest(response);
+        }
+    }
+
     [HttpGet("GetShortLink")]
     public async Task<IActionResult> GetShortLink(string url, string? optional)
     {
