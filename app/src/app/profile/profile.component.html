@@ -1,17 +1,32 @@
 <div id="profile">
     <div class="profile-container">
+        <div id="profile-header">Links</div>
         <div id="profile-links">
             <ul id="profile-links-container">
-                <li><div class="url">https://google.com</div> > <div class="short-url">https://tinytrail.com/setgG32FaeffE5B</div></li>
+                @for (link of this.links; track link.url) {
+                    <li><div class="url">{{ link.url }}</div><div class="link-copy-button"><img src="icons/copy.svg"></div></li>
+                } @empty {
+                    <li><div class="url">No Links Found</div></li>
+                }
+                <li id="li-blank"><div class="url-blank"></div></li>
+                <li id="li-blank"><div class="url-blank"></div></li>
+                <li id="li-blank"><div class="url-blank"></div></li>
+                <li id="li-blank"><div class="url-blank"></div></li>
+                <li id="li-blank"><div class="url-blank"></div></li>
+                <li id="li-blank"><div class="url-blank"></div></li>
+                <li id="li-blank"><div class="url-blank"></div></li>
+                <li id="li-blank"><div class="url-blank"></div></li>
             </ul>
         </div>
     </div>
     <div class="profile-container">
-        <div id="profile-options">
-            <span class="profile-row">Username: </span>
-            <span class="profile-row">Password: </span>
-            <span class="profile-row">Links: </span>
-            <span class="profile-row">Analytics: </span>
+        <div id="profile-header">User</div>
+            <div id="profile-options">
+            <div id="profile-list">
+                <span class="profile-row"><div class="profile-data-label">Username:</div><div class="profile-data">{{ username }}</div></span>
+                <span class="profile-row"><div class="profile-data-label">Password:</div><div class="profile-data">****</div></span>
+                <span class="profile-row"><div class="profile-data-label">Total:</div><div class="profile-data">{{ total }}</div></span>
+            </div>
         </div>
     </div>
 </div>
