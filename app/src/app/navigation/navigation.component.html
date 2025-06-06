@@ -3,6 +3,6 @@
         <a [routerLink]="['/main']">
             <span id="nav-title">tinytrail</span>
         </a>
-        <span class="icon"><a [routerLink]="['/profile']"><img src="profile.svg"></a></span>
+        <span class="icon"><a [routerLink]="['/profile']">@if (loggedIn == true) { <img src="profile.svg"> }</a></span>
     </header>
 </nav>

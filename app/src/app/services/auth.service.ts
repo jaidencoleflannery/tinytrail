@@ -5,7 +5,6 @@ import { BehaviorSubject, Observable, filter } from 'rxjs';
 export class AuthService {
 
   private isAuthenticatedSubject = new BehaviorSubject<boolean>(false);
-
   public isAuthenticated$: Observable<boolean> = this.isAuthenticatedSubject.asObservable().pipe(filter((val): val is boolean => val !== null));
 
   constructor() {
