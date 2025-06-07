@@ -4,14 +4,10 @@
         <div id="profile-links">
             <ul id="profile-links-container">
                 @for (link of this.links; track link.url) {
-                    <li><div class="url">{{ link.url }}</div><div class="link-copy-button"><img src="icons/copy.svg"></div></li>
+                    <li><div class="url">{{ link.url }}</div><div class="link-copy-button" (click)="DeleteLink(link.url)"><img src="icons/delete.svg"></div></li>
                 } @empty {
                     <li><div class="url">No Links Found</div></li>
                 }
-                <li id="li-blank"><div class="url-blank"></div></li>
-                <li id="li-blank"><div class="url-blank"></div></li>
-                <li id="li-blank"><div class="url-blank"></div></li>
-                <li id="li-blank"><div class="url-blank"></div></li>
                 <li id="li-blank"><div class="url-blank"></div></li>
                 <li id="li-blank"><div class="url-blank"></div></li>
                 <li id="li-blank"><div class="url-blank"></div></li>
@@ -25,7 +21,7 @@
             <div id="profile-list">
                 <span class="profile-row"><div class="profile-data-label">Username:</div><div class="profile-data">{{ username }}</div></span>
                 <span class="profile-row"><div class="profile-data-label">Password:</div><div class="profile-data">****</div></span>
-                <span class="profile-row"><div class="profile-data-label">Total:</div><div class="profile-data">{{ total }}</div></span>
+                <span class="profile-row"><div class="profile-data-label">Total Links:</div><div class="profile-data">{{ total }}</div></span>
             </div>
         </div>
     </div>

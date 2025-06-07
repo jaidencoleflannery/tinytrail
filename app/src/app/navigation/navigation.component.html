@@ -1,8 +1,13 @@
 <nav>
-    <header class="nav-header">
-        <a [routerLink]="['/main']">
-            <span id="nav-title">tinytrail</span>
-        </a>
-        <span class="icon"><a [routerLink]="['/profile']">@if (loggedIn == true) { <img src="profile.svg"> }</a></span>
-    </header>
+    @if (loggedIn == true) {
+        <header class="nav-header">
+            <a [routerLink]="['/main']">
+                <img id="nav-title" class="icon" src="icons/logo.svg">
+            </a>
+            <div id="nav-options">
+                <span class="icon"><a [routerLink]="['/profile']"> <img src="icons/profile.svg"></a></span>
+                <span class="icon"><a [routerLink]="['/login']" (click)="logout()"> <img src="icons/logout.svg"></a></span>
+            </div>
+        </header>
+    }
 </nav>
