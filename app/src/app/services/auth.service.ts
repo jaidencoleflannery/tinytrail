@@ -35,6 +35,30 @@ export class AuthService {
     }
   }
 
+  async logout(): Promise<boolean> {
+    console.log("Logging out");
+    this.isAuthenticatedSubject.next(false);
+    try {
+      const res = await fetch('http://localhost:5137/api/auth/logout', {
+        credentials: 'include',
+        method: 'GET'
+      });
+
+      if(!res.ok) {
+        console.log("response not ok - fail");
+        throw new Error('COULD NOT LOG OUT');
+      } else {
+        console.log("response good");
+        const authenticated = res.ok;
+        console.log("logged out");
+        return authenticated;
+      }
+    } catch {
+      this.isAuthenticatedSubject.next(true);
+      return false;
+    }
+  }
+
   async login(username: string, password: string): Promise<boolean> {
     const user = username;
     const pass = password;

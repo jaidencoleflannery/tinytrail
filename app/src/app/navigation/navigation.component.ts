@@ -26,4 +26,9 @@ export class NavigationComponent implements OnInit {
       }
     });
   }
+
+  async logout() {
+    const res = await this.authService.logout();
+  }
+
 }
